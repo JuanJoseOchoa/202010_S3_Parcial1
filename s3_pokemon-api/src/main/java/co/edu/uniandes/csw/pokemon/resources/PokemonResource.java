@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.pokemon.resources;
 
+import co.edu.uniandes.csw.pokemon.dtos.PokemonDTO;
+import co.edu.uniandes.csw.pokemon.ejb.PokemonLogic;
 import co.edu.uniandes.csw.pokemon.exceptions.BusinessLogicException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -28,12 +31,16 @@ public class PokemonResource {
     
     
     private static final Logger LOGGER = Logger.getLogger(PokemonResource.class.getName());
-
     
+    @Inject
+    private PokemonLogic pokemonLogic;
     
-//    @POST
-//    public PokemonDTO createPokemon(PokemonDTO pokemon) throws BusinessLogicException{
-//       throw new java.lang.UnsupportedOperationException("Not supported yet.");  
-//    }
-    
+    @POST
+    public PokemonDTO createPokemon(PokemonDTO pokemon) throws BusinessLogicException 
+    {
+        LOGGER.log(Level.INFO, "PokemonResource createPokemon: input: {0}", pokemon);
+        PokemonDTO nuevoPokemonDTO = new PokemonDTO(pokemonLogic.createPokemon(pokemon.toEntity()));
+        LOGGER.log(Level.INFO, "PokemonResource createPokemon: output: {0}", nuevoPokemonDTO);
+        return nuevoPokemonDTO;
+    }
 }

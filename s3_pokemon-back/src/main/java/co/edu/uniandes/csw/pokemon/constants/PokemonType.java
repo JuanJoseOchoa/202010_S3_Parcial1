@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.pokemon.constants;
 
 /**
  *
- * @author Ash K
+ * @author Ash Salsa de Tomate
  */
 public enum PokemonType {
     
